@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/worldscratchmap/static/css/main.b1dbaac0.chunk.css",
+    "main.js": "/worldscratchmap/static/js/main.b27d8f36.chunk.js",
+    "main.js.map": "/worldscratchmap/static/js/main.b27d8f36.chunk.js.map",
+    "runtime-main.js": "/worldscratchmap/static/js/runtime-main.f99fbd52.js",
+    "runtime-main.js.map": "/worldscratchmap/static/js/runtime-main.f99fbd52.js.map",
+    "static/js/2.c66801bb.chunk.js": "/worldscratchmap/static/js/2.c66801bb.chunk.js",
+    "static/js/2.c66801bb.chunk.js.map": "/worldscratchmap/static/js/2.c66801bb.chunk.js.map",
+    "index.html": "/worldscratchmap/index.html",
+    "static/css/main.b1dbaac0.chunk.css.map": "/worldscratchmap/static/css/main.b1dbaac0.chunk.css.map",
+    "static/js/2.c66801bb.chunk.js.LICENSE.txt": "/worldscratchmap/static/js/2.c66801bb.chunk.js.LICENSE.txt",
+    "static/media/main.css": "/worldscratchmap/static/media/highway.7b17f002.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f99fbd52.js",
+    "static/js/2.c66801bb.chunk.js",
+    "static/css/main.b1dbaac0.chunk.css",
+    "static/js/main.b27d8f36.chunk.js"
+  ]
+}
