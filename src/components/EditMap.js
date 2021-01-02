@@ -96,7 +96,7 @@ const EditMap = () => {
 
     let countriesRes = [];
     try {
-      countriesRes = await axios.post('/map/',
+      countriesRes = await axios.post(`${process.env.REACT_APP_API_URL}/map/`,
         formData.entry,
         {
           headers: {
@@ -151,7 +151,7 @@ const EditMap = () => {
 
   const fetchCountries = async () => {
     try {
-      const res = await axios.get(`/map/${userData.user.user_id}`)
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/map/${userData.user.user_id}`)
       setCountries(res.data)
     } catch (err) {
       // TODO add error for bottom countries section

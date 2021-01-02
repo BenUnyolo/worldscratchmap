@@ -17,7 +17,7 @@ const Login = () => {
         const authToken = Buffer.from(`${formData["username"]}:${formData["password"]}`, 'utf8').toString('base64')
 
         try {
-            const loginRes = await axios.get('/user/login',
+            const loginRes = await axios.get(`${process.env.REACT_APP_API_URL}/user/login`,
                 {
                     headers: {
                         'Authorization': `Basic ${authToken}`

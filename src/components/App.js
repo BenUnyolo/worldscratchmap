@@ -31,7 +31,7 @@ const App = () => {
 			let userRes = null;
 			try {
 				userRes = await axios.get(
-					'/user/',
+					`${process.env.REACT_APP_API_URL}/user/`,
 					{
 						headers: {
 							"Content-type": "application/json",

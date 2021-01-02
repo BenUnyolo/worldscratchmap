@@ -18,7 +18,7 @@ const Register = () => {
     const onSubmit = async formData => {
         setError(null)
         try {
-            await axios.post('/user/', formData);
+            await axios.post(`${process.env.REACT_APP_API_URL}/user/`, formData);
             const loginRes = await axios.get('/login/', {
                 username: formData["username"],
                 password: formData["password"]

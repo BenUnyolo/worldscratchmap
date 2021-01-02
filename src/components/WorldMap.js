@@ -9,6 +9,18 @@ import geoJsonData from '../world.geo.json';
 
 const geoJson = geoJsonData.features
 
+// let sqlString = ""
+// geoJson.sort(function(a, b) {
+//     var textA = a.properties.name.toUpperCase();
+//     var textB = b.properties.name.toUpperCase();
+//     return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+// });
+// geoJson.forEach((country) => {
+//     let string = `("${country.properties.adm0_a3}", "${country.properties.name}"),`
+//     sqlString = sqlString.concat('\n', string)
+// })
+// console.log(sqlString)
+
 const WorldMap = (props) => {
     const { userData } = useContext(UserContext)
     const { countries, setCountries } = useContext(CountriesContext)
@@ -19,7 +31,7 @@ const WorldMap = (props) => {
 
     const fetchCountries = async () => {
         // TODO add try catch
-        const res = await axios.get(`/map/${userData.user.user_id}`)
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/map/${userData.user.user_id}`)
         // add countries array with years to context
         setCountries(res.data)
     }
@@ -55,7 +67,6 @@ const WorldMap = (props) => {
     // onEachFeature function for map (adds tooltip for countries)
     const onEachFeature = (feature, layer) => {
         let yearVisited;
-        console.log(feature)
         // console.log("GOT HERE 2")
         // if (countries.length !== 0) {
         //     const countryState = countries.reduce((country) => country.country_code === feature.properties.iso_a3)

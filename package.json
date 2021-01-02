@@ -1,6 +1,6 @@
 {
   "name": "worldmap",
-  "homepage": "http://benunyolo.github.io/worldscratchmap",
+  "homepage": "http://benunyolo.github.io/WorldScratchMap",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -30,7 +30,6 @@
     "eject": "react-scripts eject",
     "watch:css": "postcss src/assets/tailwind.css -o src/assets/main.css"
   },
-  "proxy": "http://localhost:5000",
   "eslintConfig": {
     "extends": [
       "react-app",
