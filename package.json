@@ -1,6 +1,7 @@
 {
   "name": "worldmap",
-  "homepage": "http://benunyolo.github.io/WorldScratchMap",
+  "homepage": ".",
+  "nothomepage": "http://benunyolo.github.io/worldscratchmap",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -25,7 +26,7 @@
     "deploy": "gh-pages -d build",
     "start": "npm run watch:css && react-scripts start",
     "start-api": "cd api && pipenv run flask run --no-debugger",
-    "build": "npm run watch:css && react-scripts build",
+    "build": "NODE_ENV=production npm run watch:css && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "watch:css": "postcss src/assets/tailwind.css -o src/assets/main.css"

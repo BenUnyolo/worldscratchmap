@@ -5,7 +5,10 @@ module.exports = {
     // removeDeprecatedGapUtilities: true,
     // purgeLayersByDefault: true,
   },
-  purge: [],
+  purge: [
+    './src/**/*.js',
+    './src/**/*.jsx'
+  ],
   target: 'relaxed',
   prefix: '',
   important: false,
@@ -26,7 +29,7 @@ module.exports = {
       white: '#fff',
 
       primary: colors.red,
-      
+
 
       gray: {
         100: '#f7fafc',
