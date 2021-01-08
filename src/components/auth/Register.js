@@ -12,10 +12,13 @@ const Register = () => {
 
     const [error, setError] = useState(null);
 
+    const [loader, setLoader] = useState(false);
+
     const { register, handleSubmit, errors, watch } = useForm({
         mode: 'onTouched'
     });
     const onSubmit = async formData => {
+        setLoader(true)
         setError(null)
         try {
             await axios.post(`${process.env.REACT_APP_API_URL}/user/`, formData);
@@ -28,14 +31,15 @@ const Register = () => {
                 user: loginRes.data.user,
             });
             localStorage.setItem("auth-token", loginRes.data.token);
+            setLoader(false)
             history.push("/map/");
         } catch (err) {
+            setLoader(false)
             if (err.response.data.message) {
                 setError(err.response.data.message)
             } else {
                 setError("An error occured, please try again or let us know the issue")
             }
-            console.log(err.response)
         }
 
     };
@@ -92,32 +96,6 @@ const Register = () => {
 
     return (
         <>
-            {/* <div className="w-full max-w-xs">
-                <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlhtmlFor="username">
-                            Username
-                        </label>
-                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username" />
-                    </div>
-                    <div className="mb-6">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlhtmlFor="password">
-                            Password
-                        </label>
-                        <input className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="******************" />
-                        <p className="text-red-500 text-xs italic">Please choose a password.</p>
-                    </div>
-                    <div className="flex items-center justify-between">
-                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-                            Sign In
-                        </button>
-                        <div className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">
-                            Forgot Password?
-                        </div>
-                    </div>
-                </form>
-            </div> */}
-
             <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-xl m-2">
                 {renderError()}
                 <div className="flex flex-wrap -mx-3 mb-6">
@@ -133,6 +111,7 @@ const Register = () => {
                     {renderField("password_verify", "Verify Password *", passVerifyRef, "password", "**********")}
                 </div>
                 <input type="submit" value="Register" className="button bg-blue-500 hover:bg-blue-700 focus:outline-none focus:shadow-outline" />
+                {loader ? <span>Loading...</span> : ""}
             </form>
         </>
     )

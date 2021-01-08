@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState, useRef } from 'react';
 import axios from 'axios';
-import { MapContainer, TileLayer, Marker, Popup, Polygon, Tooltip, GeoJSON } from "react-leaflet";
+import { MapContainer, TileLayer, Tooltip, GeoJSON } from "react-leaflet";
 // geojson from https://geojson-maps.ash.ms/
 
 import UserContext from '../context/UserContext'
@@ -25,8 +25,6 @@ const WorldMap = (props) => {
     const { userData } = useContext(UserContext)
     const { countries, setCountries } = useContext(CountriesContext)
 
-    const [highlightedCountries, setHighlightedCountries] = useState([]);
-
     const geoJsonLayer = useRef()
 
     const fetchCountries = async () => {
@@ -44,39 +42,38 @@ const WorldMap = (props) => {
         }
     }, [userData])
 
-    // updates local highlightedCountries state when countries context updates
-    useEffect(() => {
-        setHighlightedCountries(countries.map((item) => item.country_code))
-    }, [countries])
-
-    // updates geoJson highlighting when highlightedCountries state changes
+    // updates geoJson highlighting when countries state changes
     useEffect(() => {
         // runs if .current property initialised
         if (geoJsonLayer.current) {
-            // filter JSON to only visited countries
-            const visitedJson = geoJson.filter((country) => {
-                return highlightedCountries.indexOf(country.properties.iso_a3) !== -1
-            })
-            // TODOzo
-            visitedJson.map((country) => "")
-            // update our map's geojson data
+            // reduce geoJSON to only visited countries
+            let visitedJson = geoJson.reduce((finalArray, geoJsonCountry) => {
+                // array.some returns true if country found in state
+                let countryPresent = countries.some((stateCountry) => {
+                    // checks if current geojson country is in the state's country array
+                    let found = (stateCountry.country_code === geoJsonCountry.properties.iso_a3);
+                    // if it is we add the year visited to the geojson properties
+                    if (found) {
+                        if (stateCountry.year_visited === 1) geoJsonCountry.properties.year_visited = "Birthplace";
+                        else if (stateCountry.year_visited === 0) geoJsonCountry.properties.year_visited = "";
+                        else geoJsonCountry.properties.year_visited = stateCountry.year_visited;
+                    }
+                    return found
+                })
+                // if the country was present add it to final array
+                if (countryPresent) return [...finalArray, geoJsonCountry]
+                // if not return previous array
+                return finalArray
+            }, [])
             geoJsonLayer.current.clearLayers().addData(visitedJson);
         }
-    }, [highlightedCountries]);
+    }, [countries]);
 
     // onEachFeature function for map (adds tooltip for countries)
     const onEachFeature = (feature, layer) => {
-        let yearVisited;
-        // console.log("GOT HERE 2")
-        // if (countries.length !== 0) {
-        //     const countryState = countries.reduce((country) => country.country_code === feature.properties.iso_a3)
-        //     console.log(countryState)
-        //     yearVisited = countryState.year_visited
-        // }
         layer.on({
             mousemove: (e) => {
-                // console.log(e, feature.properties.name, layer)
-                layer.bindTooltip(feature.properties.name + "<br>" + yearVisited);
+                layer.bindTooltip(feature.properties.name + "<br>" + feature.properties.year_visited);
                 layer.openTooltip(e.latlng);
             },
             mouseout: (e) => {

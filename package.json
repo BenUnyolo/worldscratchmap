@@ -1,7 +1,7 @@
 {
   "name": "worldmap",
-  "homepage": ".",
-  "nothomepage": "http://benunyolo.github.io/worldscratchmap",
+  "homepage": "http://benunyolo.github.io/worldscratchmap",
+  "nothomepage": ".",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -17,6 +17,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
     "react-simple-maps": "^2.3.0",
+    "react-spinners": "^0.10.4",
     "react-svg-worldmap": "^1.0.34",
     "react-tooltip": "^4.2.11",
     "web-vitals": "^0.2.4"

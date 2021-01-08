@@ -7,7 +7,7 @@ import Globe from '../images/globeSVG';
 const About = () => {
     return (
         <div className="p-3">
-            <div className="md:flex md:items-center">
+            <div className="md:flex md:items-start">
                 <div className="md:w-1/2">
                     <p className="text-2xl mb-4">Welcome to the World Scratch Map, a site where you can create interactive maps to show countries that you have visited.</p>
                     <p className="text-2xl mb-4">To get started click 'Register' in the navigation menu above to create an account.</p>
@@ -17,7 +17,7 @@ const About = () => {
                     <Globe />
                 </div>
             </div>
-            <p className="text-2xl">Site created by Ben Unyolo, to check out more go to <Link to="https://benunyolo.com">benunyolo.com</Link>.</p>
+            <p className="text-2xl">Site created by Ben Unyolo, to check out more go to <a target="_blank" href="https://benunyolo.com">benunyolo.com</a>.</p>
         </div>
     )
 }

@@ -9,16 +9,6 @@ import countriesOptions from '../countriesOptions'
 
 import WorldMap from './WorldMap';
 
-// (() => {
-//   countries.forEach((country) => {
-//     let current = country.n.length
-//     if (current > longest) {
-//       longest = current
-//       longestName = country.n
-//     }
-//   })
-// })()
-
 const years = [];
 
 // populate years array
@@ -72,6 +62,8 @@ const EditMap = () => {
   const backendDuplicatesDefault = { duplicates: [], write_success: null }
   const [backendDuplicates, setBackendDuplicates] = useState(backendDuplicatesDefault);
 
+  const [deleteError, setDeleteError] = useState(null);
+
   const clearBackendErrors = () => setBackendDuplicates(backendDuplicatesDefault)
 
   useEffect(() => (
@@ -103,22 +95,17 @@ const EditMap = () => {
             'x-access-token': localStorage.getItem("auth-token")
           }
         });
-      console.log("THIS IS THE COUNTRIES RES:")
-      console.log(countriesRes.data)
       countriesRes = countriesRes.data
       reset()
     } catch (err) {
       // TODO proper error action
-      console.log('ERROR HERE')
       console.log(err.response.data)
     }
 
     if (!countriesRes.write_success && countriesRes.duplicates && countriesRes.duplicates.length !== 0) {
-      console.log('WE ARE HERE BECAUSE IT WAS ALL DUPLICATE')
       setBackendDuplicates({ duplicates: countriesRes.duplicates, write_success: false })
       // renderError("No countries were added as they are already on your map.", true)
     } else if (countriesRes.write_success && countriesRes.duplicates && countriesRes.duplicates.length !== 0) {
-      console.log('WE ARE HERE BECAUSE THERE WERE THINGS WRITTEN BUT THERE ARE DUPLICATES')
       setBackendDuplicates({ duplicates: countriesRes.duplicates, write_success: true })
       // const duplicatesString = backendDuplicates.join(", ")
       // renderError(`Some countries were added, but the following are already on your map: ${duplicatesString}`, true, true)
@@ -127,24 +114,28 @@ const EditMap = () => {
     // if the api response has write_success = true, refetch countries and add to context
     else if (countriesRes.write_success) {
       setBackendDuplicates({ duplicates: [], write_success: true })
-      console.log('WE ARE HERE BECAUSE EVERTHING WROTE')
       fetchCountries()
     }
   }
 
   const onDeleteCountry = async (kickedCountry) => {
     try {
-      await axios.delete(`/map/${kickedCountry}`, {
+      setDeleteError(null)
+      await axios.delete(`${process.env.REACT_APP_API_URL}/map/${kickedCountry.country_code}`, {
         headers: {
           'x-access-token': localStorage.getItem("auth-token")
         }
       });
       // filter removed country from context
-      const newCountries = countries.filter((country) => country.country_code !== kickedCountry)
+      const newCountries = countries.filter((country) => country.country_code !== kickedCountry.country_code)
       setCountries(newCountries)
     } catch (err) {
       // TODO add error for bottom countries section
-      console.log('NO BUENO')
+      if (err.response.data.message) {
+        setDeleteError(`Unable to delete ${kickedCountry.country}: ${err.response.data.message}`)
+      } else {
+        setDeleteError(`Unable to delete ${kickedCountry.country}, please try again`)
+      }
       console.log(err.response.data)
     }
   }
@@ -185,7 +176,7 @@ const EditMap = () => {
             </div>
           </div>
           <div className="flex-none flex">
-            <button className="m-auto" onClick={() => onDeleteCountry(country.country_code)}>
+            <button className="m-auto" onClick={() => onDeleteCountry(country)}>
               {crossIcon}
             </button>
           </div>
@@ -195,7 +186,6 @@ const EditMap = () => {
   }
 
   const renderError = (errorText, closeFunction, alert) => {
-
     return (
       <>
         <div className={"flex px-2 py-1 mb-2 " + (alert ? "bg-yellow-200 text-yellow-700" : "bg-red-200 text-red-700")}>
@@ -233,6 +223,11 @@ const EditMap = () => {
       const duplicatesString = backendDuplicates.duplicates.join(", ")
       return renderError(`Some countries were added, but the following are already on your map: ${duplicatesString}`, clearBackendErrors, true)
     }
+  }
+
+  const renderDeleteError = () => {
+    const closeDeleteError = () => setDeleteError(null);
+    if (deleteError) return renderError(deleteError, closeDeleteError)
   }
 
   const editComponent = (
@@ -308,6 +303,7 @@ const EditMap = () => {
         </form>
       </div>
       <div>
+        {renderDeleteError()}
         {renderCountriesList()}
       </div>
     </div>
