@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/worldscratchmap/static/css/main.2a8d3323.chunk.css",
-    "main.js": "/worldscratchmap/static/js/main.109c950b.chunk.js",
-    "main.js.map": "/worldscratchmap/static/js/main.109c950b.chunk.js.map",
+    "main.css": "/worldscratchmap/static/css/main.5206a5e7.chunk.css",
+    "main.js": "/worldscratchmap/static/js/main.c194c61d.chunk.js",
+    "main.js.map": "/worldscratchmap/static/js/main.c194c61d.chunk.js.map",
     "runtime-main.js": "/worldscratchmap/static/js/runtime-main.f99fbd52.js",
     "runtime-main.js.map": "/worldscratchmap/static/js/runtime-main.f99fbd52.js.map",
     "static/js/2.83f3e4c5.chunk.js": "/worldscratchmap/static/js/2.83f3e4c5.chunk.js",
     "static/js/2.83f3e4c5.chunk.js.map": "/worldscratchmap/static/js/2.83f3e4c5.chunk.js.map",
     "index.html": "/worldscratchmap/index.html",
-    "static/css/main.2a8d3323.chunk.css.map": "/worldscratchmap/static/css/main.2a8d3323.chunk.css.map",
+    "static/css/main.5206a5e7.chunk.css.map": "/worldscratchmap/static/css/main.5206a5e7.chunk.css.map",
     "static/js/2.83f3e4c5.chunk.js.LICENSE.txt": "/worldscratchmap/static/js/2.83f3e4c5.chunk.js.LICENSE.txt",
     "static/media/main.css": "/worldscratchmap/static/media/highway.c1a7a943.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.f99fbd52.js",
     "static/js/2.83f3e4c5.chunk.js",
-    "static/css/main.2a8d3323.chunk.css",
-    "static/js/main.109c950b.chunk.js"
+    "static/css/main.5206a5e7.chunk.css",
+    "static/js/main.c194c61d.chunk.js"
   ]
 }

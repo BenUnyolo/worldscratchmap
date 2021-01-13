@@ -28,7 +28,7 @@ module.exports = {
       black: '#000',
       white: '#fff',
 
-      primary: colors.red,
+      primary: colors.teal,
 
 
       gray: {

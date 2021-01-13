@@ -80,7 +80,7 @@ const Login = () => {
                         <input name="password" ref={register({ required: true })} className={"border-gray-200 mb-3 focus:border-gray-500" + inputClass} id="password" type="password" placeholder="******************" />
                     </div>
                 </div>
-                <input type="submit" className="button bg-blue-500 hover:bg-blue-700 focus:outline-none focus:shadow-outline" />
+                <input type="submit" className="button bg-primary-500 border border-transparent hover:text-primary-500 hover:bg-white hover:border-primary-500 focus:outline-none focus:shadow-outline" />
                 {loader ? <span>Loading...</span> : ""}
             </form>
         </>

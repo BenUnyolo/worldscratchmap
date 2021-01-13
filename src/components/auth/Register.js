@@ -110,7 +110,7 @@ const Register = () => {
                     {renderField("password", "Password *", { required: true, minLength: 8, maxLength: 100 }, "password", "**********")}
                     {renderField("password_verify", "Verify Password *", passVerifyRef, "password", "**********")}
                 </div>
-                <input type="submit" value="Register" className="button bg-blue-500 hover:bg-blue-700 focus:outline-none focus:shadow-outline" />
+                <input type="submit" value="Register" className="button bg-primary-500 border border-transparent hover:text-primary-500 hover:bg-white hover:border-primary-500 focus:outline-none focus:shadow-outline" />
                 {loader ? <span>Loading...</span> : ""}
             </form>
         </>
